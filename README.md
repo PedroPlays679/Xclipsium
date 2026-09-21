@@ -2,7 +2,7 @@
 
 **Experimental GPU rendering optimization project for Minecraft Java Edition, initially focused on Samsung Xclipse and AMD RDNA-based GPUs.**
 
-> ⚠️ Xclipsium is currently in early development. It is not yet a performance-enhancing renderer.
+> ⚠️ Xclipsium is currently in early development. It is a research project and is not yet a performance-enhancing renderer.
 
 ## 🎯 About
 
@@ -14,19 +14,21 @@ The objective is not to create a renderer limited to one device family, but to i
 
 ## 🧪 Current Status
 
-**Version:** 0.1.0 — Early Development
+**Version:** 0.2.0 — GPU Detection
 
 Current milestone:
 
 * ✅ Minecraft 26.3
-* ✅ Fabric Loader 0.19.3
-* ✅ Fabric API 0.160.5+26.3
+* ✅ Fabric Loader 0.19.5
+* ✅ Fabric API 0.161.0+26.3
 * ✅ Successfully launches on Android
 * ✅ Successfully enters and renders a world
 * ✅ Tested on Samsung Galaxy A55
-* ✅ Tested with Samsung Xclipse 530
+* ✅ Samsung Xclipse 530 detected
 * ✅ Vulkan backend confirmed
-* 🔧 GPU/device detection inside Xclipsium
+* ✅ Vulkan driver information detected
+* ✅ GPU/device information detected
+* 🔧 Vulkan capability detection
 * 🔧 Rendering pipeline research
 * ⏳ GPU-driven rendering
 * ⏳ Xclipse/RDNA-specific optimizations
@@ -40,7 +42,7 @@ Xclipsium's initial development is centered around **AMD RDNA-based graphics tec
 
 **Samsung Xclipse**
 
-The first development hardware is the **Xclipse 530** found in the Galaxy A55.
+The primary development hardware is the **Xclipse 530** found in the Galaxy A55.
 
 ### Long-term targets
 
@@ -92,14 +94,16 @@ The current priority is understanding Minecraft's modern rendering pipeline and 
 
 ### V0.2 — GPU Detection
 
-* [ ] Reliable GPU device detection
+* [x] GPU device detection
+* [x] Vulkan backend detection
+* [x] Driver information
+* [x] GPU identification
+* [x] Basic GPU information logging
+
+### V0.3 — Vulkan & Rendering Research
+
 * [ ] Vulkan capability detection
-* [ ] Driver information
-* [ ] GPU feature reporting
-
-### V0.3 — Rendering Research
-
-* [ ] Investigate Minecraft's rendering pipeline
+* [ ] Investigate Minecraft's modern rendering pipeline
 * [ ] Identify potential optimization points
 * [ ] Begin controlled rendering experiments
 * [ ] Investigate GPU-driven rendering techniques
@@ -120,8 +124,4 @@ Xclipsium is experimental software.
 
 Performance results may vary significantly depending on the device, GPU architecture, driver, Minecraft version, launcher and configuration.
 
-The current versions should not be expected to provide performance improvements.
-
-## 📄 License
-
-License information will be added as the project develops.
+Current versions should not be expected to provide performance improvements.
