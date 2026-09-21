@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "xclipsium",
+  "version": "${version}",
+  "name": "Xclipsium",
+  "description": "Experimental GPU-driven rendering backend for Sodium on AMD-derived GPUs.",
+  "authors": ["Xclipsium Project"],
+  "environment": "client",
+  "icon": "assets/xclipsium/icon.png",
+  "entrypoints": {
+    "client": [
+      "net.xclipsium.Xclipsium"
+    ]
+  },
+  "mixins": [
+    "xclipsium.mixins.json"
+  ],
+  "depends": {
+    "minecraft": "26.3.x",
+    "fabricloader": ">=0.19.3"
+  }
+}
