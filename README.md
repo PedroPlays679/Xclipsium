@@ -14,25 +14,92 @@ The objective is not to create a renderer limited to one device family, but to i
 
 ## 🧪 Current Status
 
-**Version:** 0.2.0 — GPU Detection
+**Version:** 0.3.0 — GPU Intelligence Layer
 
 Current milestone:
 
 * ✅ Minecraft 26.3
 * ✅ Fabric Loader 0.19.5
 * ✅ Fabric API 0.161.0+26.3
+* ✅ Java 25
 * ✅ Successfully launches on Android
 * ✅ Successfully enters and renders a world
 * ✅ Tested on Samsung Galaxy A55
 * ✅ Samsung Xclipse 530 detected
-* ✅ Vulkan backend confirmed
+* ✅ Vulkan backend detected
 * ✅ Vulkan driver information detected
 * ✅ GPU/device information detected
-* 🔧 Vulkan capability detection
-* 🔧 Rendering pipeline research
-* ⏳ GPU-driven rendering
+* ✅ GPU features detected
+* ✅ GPU hardware limits detected
+* ✅ Xclipsium capability system
+* ✅ Automatic rendering strategy selection
+* 🔧 Rendering pipeline integration
+* ⏳ GPU-driven rendering implementation
 * ⏳ Xclipse/RDNA-specific optimizations
 * ⏳ Future Radeon compatibility
+
+## 🧬 Architecture
+
+Xclipsium currently follows a capability-based architecture:
+
+```text
+GPU
+ ↓
+Device Information
+ ↓
+Features + Limits
+ ↓
+Xclipsium Capabilities
+ ↓
+Rendering Strategy
+ ↓
+Future Rendering Integration
+```
+
+The goal is to avoid making assumptions based only on the GPU name. Xclipsium evaluates the capabilities exposed by the graphics device and uses them to determine which rendering strategy is appropriate.
+
+### Current rendering strategies
+
+Xclipsium currently supports two internal strategy states:
+
+* **GPU_DRIVEN** — selected when the required GPU capabilities are available.
+* **TRADITIONAL** — fallback strategy for devices that do not meet the requirements.
+
+The current GPU-driven strategy is a **capability decision only**. It does not yet replace Minecraft's rendering pipeline.
+
+## 🔬 GPU Intelligence Layer
+
+Version 0.3.0 introduces the first complete GPU intelligence layer.
+
+Xclipsium reads information provided by Minecraft's modern RenderPearl device API, including:
+
+### Device information
+
+* GPU name
+* Vendor
+* Driver information
+* Graphics backend
+
+### GPU features
+
+* Draw Indirect
+* Multi Draw Indirect
+* Shader Draw Parameters
+* Persistent Mapping
+* Non-Zero First Instance
+* Multi Draw Direct support
+* Wireframe Fill Mode
+
+### GPU limits
+
+* Maximum anisotropy
+* Maximum texture size
+* Maximum memory allocation size
+* Maximum color attachments
+* Maximum indirect draw count
+* Uniform buffer alignment
+
+These values are converted into higher-level **Xclipsium Capabilities**, which are then used to select a rendering strategy.
 
 ## 🧬 Target Architecture
 
@@ -49,9 +116,9 @@ The primary development hardware is the **Xclipse 530** found in the Galaxy A55.
 * AMD Radeon GPUs
 * Other AMD RDNA-based hardware
 * Additional Xclipse generations
-* Potentially other compatible Vulkan devices
+* Other compatible Vulkan devices
 
-The project will distinguish between **general rendering optimizations** and **hardware-specific optimizations**, allowing techniques developed for Xclipse/RDNA to potentially be adapted to desktop Radeon hardware.
+The project distinguishes between **general rendering optimizations** and **hardware-specific optimizations**, allowing techniques developed for Xclipse/RDNA to potentially be adapted to desktop Radeon hardware.
 
 ## 📱 Current Test Hardware
 
@@ -74,13 +141,13 @@ These numbers are only an initial baseline and should not be considered an Xclip
 Xclipsium is currently being developed around:
 
 * Minecraft 26.3
-* Fabric Loader
-* Fabric API
+* Fabric Loader 0.19.5
+* Fabric API 0.161.0+26.3
 * Java 25
 * Vulkan
 * Samsung Xclipse / AMD RDNA-based hardware
 
-The current priority is understanding Minecraft's modern rendering pipeline and identifying opportunities for GPU-level optimization before implementing more aggressive changes.
+The current priority is understanding Minecraft's modern rendering pipeline and identifying opportunities for GPU-level optimization before implementing more aggressive rendering changes.
 
 ## 🚧 Roadmap
 
@@ -100,19 +167,30 @@ The current priority is understanding Minecraft's modern rendering pipeline and 
 * [x] GPU identification
 * [x] Basic GPU information logging
 
-### V0.3 — Vulkan & Rendering Research
+### V0.3 — GPU Intelligence Layer
 
-* [ ] Vulkan capability detection
-* [ ] Investigate Minecraft's modern rendering pipeline
-* [ ] Identify potential optimization points
+* [x] GPU feature detection
+* [x] GPU hardware limit detection
+* [x] Xclipsium capability system
+* [x] GPU-driven rendering capability evaluation
+* [x] Persistent buffer capability evaluation
+* [x] Indirect draw capability evaluation
+* [x] Rendering strategy selection
+* [x] Traditional rendering fallback
+
+### V0.4 — Rendering Integration
+
+* [ ] Integrate Xclipsium into the rendering path
+* [ ] Connect rendering strategy to Minecraft/Sodium rendering
 * [ ] Begin controlled rendering experiments
-* [ ] Investigate GPU-driven rendering techniques
+* [ ] Introduce the first Xclipsium rendering changes
+* [ ] Validate stability and correctness
 
 ### Future
 
+* [ ] GPU-driven rendering
 * [ ] Xclipse-specific optimizations
 * [ ] RDNA-specific optimizations
-* [ ] GPU-driven rendering
 * [ ] Performance benchmarking
 * [ ] Radeon compatibility
 * [ ] Testing across multiple RDNA generations
